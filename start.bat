@@ -11,7 +11,7 @@ start chrome "https://confluence.hro.nl/display/CMIP/0867254+-+ATX+-+Jeroen+van+
 
 start "" "C:\Program Files (x86)\Arduino\arduino.exe"
 
-cd "C:\Bitnami\wampstack-7.0.0-0\apache2\htdocs\atx"
+cd "C:/Bitnami/wampstack-7.0.0-0/apache2/htdocs/atx"
 start "" "C:\Program Files\Git\git-bash.exe"
 
 start "" "%windir%\system32\notepad.exe"
