@@ -1,0 +1,11 @@
+{
+    "name": "JeroenSteen/atx",
+    "require": {
+        "illuminate/database": "^5.2"
+    },
+    "autoload": {
+      "classmap": [
+        "models"
+      ]
+    }
+}

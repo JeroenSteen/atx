@@ -1,5 +1,11 @@
 <?php
 //phpinfo();
+
+require('vendor/autoload.php');
+require('config/database.php');
+
+dd(Term::count());
+
 //http://www.instructables.com/id/Control-an-Arduino-with-PHP/step4/How-it-works-the-Arduino-side/
 
 $terms = [

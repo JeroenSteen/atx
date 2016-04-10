@@ -1,1 +1,4 @@
-db/*.php
+/db/*.php
+/config/*.php
+/vendor/
+composer.lock
