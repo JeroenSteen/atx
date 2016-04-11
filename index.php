@@ -4,29 +4,83 @@
 require('vendor/autoload.php');
 require('config/database.php');
 
-dd(Term::count());
+$test_op  = new TestOperator();
+$fases    = $test_op->make();
 
-//http://www.instructables.com/id/Control-an-Arduino-with-PHP/step4/How-it-works-the-Arduino-side/
-
-$terms = [
-  'firstTerm'   => 'Kunstschilder',
-  'secondTerm'  => 'Schilderen'
-];
-echo json_encode($terms, true).PHP_EOL;
-
-//http://stackoverflow.com/questions/627965/serial-comm-with-php-on-windows
-exec("mode COM5 BAUD=9600 PARITY=N data=8 stop=1 xon=off");
-$fp = fopen ("COM5", "w");
-if (!$fp) {
-  echo "Not open";
-} else {
-  echo "Open";
+function is_state($check_state) {
+  if(isset($_GET["state"])) {
+    $current_state = $_GET["state"];
+    if($current_state == $check_state) {
+      return true;
+    }
+  }
+  return false;
 }
 
-$writtenBytes = fputs($fp, "Hello");
+?>
 
-echo "Bytes written to port: $writtenBytes".PHP_EOL;
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>ATX</title>
+  <meta name="description" content="Art & Technologie (E)xperiments">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-fclose();
+  <link rel="stylesheet" href="css/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="css/main.css">
 
-//Interrupts Arduino
+</head>
+<body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav>
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="#" class="brand-logo">
+            ATX
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-10">
+      <div class="row">
+        <div class="col s12 m12 l12 tac">
+
+          <?php include("_button.php"); ?>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-10">
+      <div class="row">
+        <div class="col s6 m6 l6">
+
+          <p>Kunst</p>
+          <canvas id="chart-art" width="400" height="400"></canvas>
+
+        </div>
+        <div class="col s6 m6 l6">
+
+          <p>Technologie</p>
+          <canvas id="chart-tech" width="400" height="400"></canvas>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="css/materialize/js/materialize.min.js"></script>
+    <script src="js/chartjs/Chart.min.js"></script>
+    <script src="js/interaction.js"></script>
+
+    <?php include("_data.php"); ?>
+
+  </body>
+</html>
+
