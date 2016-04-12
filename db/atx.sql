@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.8
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 09, 2016 at 02:50 PM
--- Server version: 10.0.24-MariaDB
--- PHP Version: 5.6.16
+-- Host: localhost:33066
+-- Gegenereerd op: 12 apr 2016 om 02:44
+-- Serverversie: 5.6.26
+-- PHP-versie: 7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `atx`
@@ -23,16 +23,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `branches`
+-- Tabelstructuur voor tabel `branches`
 --
 
-CREATE TABLE IF NOT EXISTS `branches` (
+CREATE TABLE `branches` (
   `id` int(11) NOT NULL,
   `branch` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `branches`
+-- Gegevens worden geëxporteerd voor tabel `branches`
 --
 
 INSERT INTO `branches` (`id`, `branch`) VALUES
@@ -42,16 +42,16 @@ INSERT INTO `branches` (`id`, `branch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `expressions`
+-- Tabelstructuur voor tabel `expressions`
 --
 
-CREATE TABLE IF NOT EXISTS `expressions` (
+CREATE TABLE `expressions` (
   `id` int(11) NOT NULL,
   `expression` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `expressions`
+-- Gegevens worden geëxporteerd voor tabel `expressions`
 --
 
 INSERT INTO `expressions` (`id`, `expression`) VALUES
@@ -71,17 +71,17 @@ INSERT INTO `expressions` (`id`, `expression`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pos_tags`
+-- Tabelstructuur voor tabel `pos_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `pos_tags` (
+CREATE TABLE `pos_tags` (
   `row_names` text COLLATE utf8_unicode_ci,
   `term` text COLLATE utf8_unicode_ci,
   `pos_tag` text COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `pos_tags`
+-- Gegevens worden geëxporteerd voor tabel `pos_tags`
 --
 
 INSERT INTO `pos_tags` (`row_names`, `term`, `pos_tag`) VALUES
@@ -2294,19 +2294,19 @@ INSERT INTO `pos_tags` (`row_names`, `term`, `pos_tag`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `professions`
+-- Tabelstructuur voor tabel `professions`
 --
 
-CREATE TABLE IF NOT EXISTS `professions` (
+CREATE TABLE `professions` (
   `id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `profession_male` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `profession_female` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=357 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `professions`
+-- Gegevens worden geëxporteerd voor tabel `professions`
 --
 
 INSERT INTO `professions` (`id`, `branch_id`, `profession_male`, `profession_female`, `description`) VALUES
@@ -2673,20 +2673,20 @@ INSERT INTO `professions` (`id`, `branch_id`, `profession_male`, `profession_fem
 -- --------------------------------------------------------
 
 --
--- Table structure for table `profession_has_terms`
+-- Tabelstructuur voor tabel `profession_terms`
 --
 
-CREATE TABLE IF NOT EXISTS `profession_has_terms` (
+CREATE TABLE `profession_terms` (
   `id` int(11) NOT NULL,
   `profession_id` int(11) NOT NULL,
   `term_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21394 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `profession_has_terms`
+-- Gegevens worden geëxporteerd voor tabel `profession_terms`
 --
 
-INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
+INSERT INTO `profession_terms` (`id`, `profession_id`, `term_id`) VALUES
 (90, 1, 1),
 (91, 1, 2),
 (96, 1, 5),
@@ -5885,7 +5885,7 @@ INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
 (11290, 128, 956),
 (11291, 134, 956),
 (11330, 48, 959);
-INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
+INSERT INTO `profession_terms` (`id`, `profession_id`, `term_id`) VALUES
 (11331, 48, 960),
 (11332, 168, 960),
 (11333, 192, 960),
@@ -8693,7 +8693,7 @@ INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
 (17826, 224, 2267),
 (17827, 274, 2267),
 (17828, 326, 2267);
-INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
+INSERT INTO `profession_terms` (`id`, `profession_id`, `term_id`) VALUES
 (17829, 100, 2268),
 (17830, 224, 2268),
 (17831, 274, 2268),
@@ -10527,16 +10527,16 @@ INSERT INTO `profession_has_terms` (`id`, `profession_id`, `term_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stopwords`
+-- Tabelstructuur voor tabel `stopwords`
 --
 
-CREATE TABLE IF NOT EXISTS `stopwords` (
+CREATE TABLE `stopwords` (
   `id` int(11) NOT NULL,
   `stopword` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2672 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `stopwords`
+-- Gegevens worden geëxporteerd voor tabel `stopwords`
 --
 
 INSERT INTO `stopwords` (`id`, `stopword`) VALUES
@@ -11713,10 +11713,10 @@ INSERT INTO `stopwords` (`id`, `stopword`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `terms`
+-- Tabelstructuur voor tabel `terms`
 --
 
-CREATE TABLE IF NOT EXISTS `terms` (
+CREATE TABLE `terms` (
   `id` int(11) NOT NULL,
   `term` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `discipline` int(255) DEFAULT NULL,
@@ -11744,10 +11744,10 @@ CREATE TABLE IF NOT EXISTS `terms` (
   `is_subject` tinyint(1) DEFAULT '0',
   `is_exposure` tinyint(1) DEFAULT '0',
   `pos_tag` varchar(100) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3125 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `terms`
+-- Gegevens worden geëxporteerd voor tabel `terms`
 --
 
 INSERT INTO `terms` (`id`, `term`, `discipline`, `function`, `company`, `technique`, `method`, `proces`, `material`, `result`, `style`, `movement`, `subject`, `exposure`, `is_discipline`, `is_function`, `is_company`, `is_technique`, `is_method`, `is_proces`, `is_material`, `is_result`, `is_style`, `is_movement`, `is_subject`, `is_exposure`, `pos_tag`) VALUES
@@ -13879,60 +13879,126 @@ INSERT INTO `terms` (`id`, `term`, `discipline`, `function`, `company`, `techniq
 -- --------------------------------------------------------
 
 --
--- Table structure for table `term_has_expressions`
+-- Tabelstructuur voor tabel `term_has_expressions`
 --
 
-CREATE TABLE IF NOT EXISTS `term_has_expressions` (
+CREATE TABLE `term_has_expressions` (
   `id` int(11) NOT NULL,
   `term_id` int(11) NOT NULL,
   `expression_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Tabelstructuur voor tabel `test_fases`
+--
+
+CREATE TABLE `test_fases` (
+  `id` int(11) NOT NULL,
+  `tester` int(11) NOT NULL,
+  `begin_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `milliseconds` int(11) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `profession_id` int(11) NOT NULL,
+  `expression_id` int(11) NOT NULL,
+  `is_female` tinyint(1) NOT NULL,
+  `is_male` tinyint(1) NOT NULL DEFAULT '0',
+  `gender` enum('male','female') COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `test_fases`
+--
+
+INSERT INTO `test_fases` (`id`, `tester`, `begin_time`, `end_time`, `milliseconds`, `branch_id`, `profession_id`, `expression_id`, `is_female`, `is_male`, `gender`) VALUES
+(1, 1, '2016-04-12 07:37:40', '2016-04-12 07:37:40', 200, 2, 1, 1, 0, 1, 'female'),
+(2, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'male'),
+(3, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'female'),
+(4, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'male'),
+(5, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'female'),
+(6, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'male'),
+(7, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(8, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(9, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(10, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(11, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(12, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(13, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(14, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(15, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(16, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(17, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(18, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(19, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(20, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(21, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(22, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(23, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(24, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(25, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(26, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(27, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(28, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(29, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(30, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(31, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(32, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(33, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(34, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(35, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(36, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(37, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(38, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female'),
+(39, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 200, 2, 1, 1, 0, 1, 'male'),
+(40, 1, '2016-04-12 07:37:41', '2016-04-12 07:37:41', 300, 1, 1, 1, 1, 0, 'female');
+
+--
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `branches`
+-- Indexen voor tabel `branches`
 --
 ALTER TABLE `branches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `expressions`
+-- Indexen voor tabel `expressions`
 --
 ALTER TABLE `expressions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `professions`
+-- Indexen voor tabel `professions`
 --
 ALTER TABLE `professions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_profession_branch_id` (`branch_id`);
 
 --
--- Indexes for table `profession_has_terms`
+-- Indexen voor tabel `profession_terms`
 --
-ALTER TABLE `profession_has_terms`
+ALTER TABLE `profession_terms`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_profession_has_term_profession_id` (`profession_id`),
   ADD KEY `fk_profession_has_term_term_id` (`term_id`);
 
 --
--- Indexes for table `stopwords`
+-- Indexen voor tabel `stopwords`
 --
 ALTER TABLE `stopwords`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `terms`
+-- Indexen voor tabel `terms`
 --
 ALTER TABLE `terms`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `term_has_expressions`
+-- Indexen voor tabel `term_has_expressions`
 --
 ALTER TABLE `term_has_expressions`
   ADD PRIMARY KEY (`id`),
@@ -13940,63 +14006,74 @@ ALTER TABLE `term_has_expressions`
   ADD KEY `fk_term_has_expression_term_id` (`term_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexen voor tabel `test_fases`
+--
+ALTER TABLE `test_fases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `branches`
+-- AUTO_INCREMENT voor een tabel `branches`
 --
 ALTER TABLE `branches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `expressions`
+-- AUTO_INCREMENT voor een tabel `expressions`
 --
 ALTER TABLE `expressions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT for table `professions`
+-- AUTO_INCREMENT voor een tabel `professions`
 --
 ALTER TABLE `professions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=357;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
 --
--- AUTO_INCREMENT for table `profession_has_terms`
+-- AUTO_INCREMENT voor een tabel `profession_terms`
 --
-ALTER TABLE `profession_has_terms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21394;
+ALTER TABLE `profession_terms`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21394;
 --
--- AUTO_INCREMENT for table `stopwords`
+-- AUTO_INCREMENT voor een tabel `stopwords`
 --
 ALTER TABLE `stopwords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2672;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2672;
 --
--- AUTO_INCREMENT for table `terms`
+-- AUTO_INCREMENT voor een tabel `terms`
 --
 ALTER TABLE `terms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3125;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3125;
 --
--- AUTO_INCREMENT for table `term_has_expressions`
+-- AUTO_INCREMENT voor een tabel `term_has_expressions`
 --
 ALTER TABLE `term_has_expressions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT voor een tabel `test_fases`
+--
+ALTER TABLE `test_fases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+--
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `professions`
+-- Beperkingen voor tabel `professions`
 --
 ALTER TABLE `professions`
   ADD CONSTRAINT `fk_profession_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`id`);
 
 --
--- Constraints for table `profession_has_terms`
+-- Beperkingen voor tabel `profession_terms`
 --
-ALTER TABLE `profession_has_terms`
+ALTER TABLE `profession_terms`
   ADD CONSTRAINT `fk_profession_has_term_profession_id` FOREIGN KEY (`profession_id`) REFERENCES `professions` (`id`),
   ADD CONSTRAINT `fk_profession_has_term_term_id` FOREIGN KEY (`term_id`) REFERENCES `terms` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `term_has_expressions`
+-- Beperkingen voor tabel `term_has_expressions`
 --
 ALTER TABLE `term_has_expressions`
   ADD CONSTRAINT `fk_term_has_expression_expression_id` FOREIGN KEY (`expression_id`) REFERENCES `expressions` (`id`),

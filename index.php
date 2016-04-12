@@ -7,16 +7,6 @@ require('config/database.php');
 $test_op  = new TestOperator();
 $fases    = $test_op->make();
 
-function is_state($check_state) {
-  if(isset($_GET["state"])) {
-    $current_state = $_GET["state"];
-    if($current_state == $check_state) {
-      return true;
-    }
-  }
-  return false;
-}
-
 ?>
 
 <!doctype html>
@@ -40,7 +30,7 @@ function is_state($check_state) {
     <nav>
       <div class="nav-wrapper">
         <div class="container">
-          <a href="#" class="brand-logo">
+          <a class="brand-logo">
             ATX
           </a>
         </div>
@@ -58,25 +48,16 @@ function is_state($check_state) {
     </div>
 
     <div class="container mt-10">
-      <div class="row">
-        <div class="col s6 m6 l6">
 
-          <p>Kunst</p>
-          <canvas id="chart-art" width="400" height="400"></canvas>
+      <?php include("_charts.php"); ?>
 
-        </div>
-        <div class="col s6 m6 l6">
-
-          <p>Technologie</p>
-          <canvas id="chart-tech" width="400" height="400"></canvas>
-
-        </div>
-      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
     <script src="css/materialize/js/materialize.min.js"></script>
     <script src="js/chartjs/Chart.min.js"></script>
+    <script src="js/uri/src/URI.min.js"></script>
+
     <script src="js/interaction.js"></script>
 
     <?php include("_data.php"); ?>

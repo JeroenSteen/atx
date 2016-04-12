@@ -1,0 +1,22 @@
+<?php
+
+require('../vendor/autoload.php');
+require('../config/database.php');
+
+if(isset($_POST["begin_time"]) && isset($_POST["end_time"]) && isset($_POST["tester"]) && isset($_POST["milliseconds"])) {
+  $begin_time   = $_POST["begin_time"];
+  $end_time     = $_POST["end_time"];
+  $tester       = $_POST["tester"];
+  $milliseconds = $_POST["milliseconds"];
+
+  //$branch_id = $_POST["branch_id"];
+  //$profession_id = $_POST["profession_id"];
+  //$expression_id = $_POST["expression_id"];
+
+  $fase               = new TestFase();
+  $fase->begin_time   = $begin_time;
+  $fase->end_time     = $end_time;
+  $fase->tester       = $tester;
+  $fase->milliseconds = $milliseconds;
+
+}

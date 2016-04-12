@@ -20,8 +20,13 @@ void loop() {
   
    if (Serial.available() > 0) { //if there is anything on the serial port, read it
         String msg = Serial.readString();
+        int commaIndex = msg.indexOf(',');
+        int msgLength = msg.length();
+                
+        String beginTerm = msg.substring(0, commaIndex);
+        String endTerm = msg.substring(commaIndex+1, msgLength);
         
-        setTerms("Beeldhouwer", msg);
+        setTerms(beginTerm, endTerm);
    } else {
      setTerms("Paverpoller", "Paverpollen");
    }

@@ -2,34 +2,51 @@
 
 class FaseOperator {
 
-  public function send($terms) {
+  public function send($fase_id) {
+
+    //Find test file
+    $fases  = file_get_contents("tmp/test.json");
+    $fases  = json_decode($fases, true);
+    $fase   = $fases[$fase_id];
+
+    //Find attributes
+    $profession  = $fase["profession"];
+    $expression  = $fase["expression"];
+
+    //Profession up (0) or down (1)
+    $pos = rand(0,1);
+    //Profession needs to be up
+    if($pos == 0) {
+      $terms = [
+        'firstTerm'   => $profession,
+        'secondTerm'  => $expression,
+        'rightTerm'   => $profession
+      ];
+    } else {
+      $terms = [
+        'firstTerm'   => $expression,
+        'secondTerm'  => $profession,
+        'rightTerm'   => $profession
+      ];
+    }
 
     //http://stackoverflow.com/questions/627965/serial-comm-with-php-on-windows
 
-    /*
-    $terms = [
-      'firstTerm'   => 'Kunstschilder',
-      'secondTerm'  => 'Schilderen'
-    ];
-    echo json_encode($terms, true).PHP_EOL;
-    */
-
     exec("mode COM5 BAUD=9600 PARITY=N data=8 stop=1 xon=off");
-    $fp = fopen ("COM5", "w");
-    if (!$fp) {
-      echo "Not open";
-    } else {
-      echo "Open";
-    }
+    $fp = fopen("COM5", "w");
+    $open_state = (!$fp) ? "Not open: " : "Open: ";
+
     //Write to port
-    $writtenBytes = fputs($fp, "Hello");
+    $writtenBytes = fputs($fp, $terms["firstTerm"].",".$terms["secondTerm"]);
 
-    echo "Bytes written to port: $writtenBytes".PHP_EOL;
+    $terms["log"] = $open_state."Bytes written to port: $writtenBytes";
 
-    fclose();
+    fclose($fp);
 
     //Interrupts Arduino
-    }
+    return $terms;
+
+  }
 
 }
 
