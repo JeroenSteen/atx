@@ -5,14 +5,24 @@ var url;
 //Passed test boolean
 var passed = false;
 
+function getTimeStamp(time) {
+  //return time.toISOString().slice(0, 19).replace('T', ' ');
+  return moment(time).tz("Europe/Amsterdam").format();
+}
+
 $(document).keydown(function(e){
   //Key pressed
-  var key       = e.keyCode;
+  var key           = e.keyCode;
   //Terms of fase
-  var beginTerm = $("#beginTerm").html();
-  var endTerm   = $("#endTerm").html();
+  var beginTerm     = $("#beginTerm").html();
+  var endTerm       = $("#endTerm").html();
   //Correct answer to pass test
-  var rightTerm = $("#rightTerm").html();
+  var rightTerm     = $("#rightTerm").html();
+  //Atrributes
+  var branchID      = $("#branchID").html();
+  var professionID  = $("#professionID").html();
+  var expressionID  = $("#expressionID").html();
+  var gender        = $("#gender").html();
 
   switch(key) {
     case 38:
@@ -49,18 +59,23 @@ $(document).keydown(function(e){
     var testerID  = curUrl.query(true).tester;
     plainUrl      = curUrl.search("").href();
 
+    //console.log(bt,et,m,testerID,branchID,professionID,expressionID,gender);
     //Save time, and wait
     $.post({
       url: plainUrl+'ajax/save_time.php',
       data: {
-        begin_time: bt,
-        end_time: et,
+        begin_time: getTimeStamp(bt),
+        end_time: getTimeStamp(et),
         milliseconds: m,
-        tester: testerID
+        tester: testerID,
+        branch_id: branchID,
+        profession_id: professionID,
+        expression_id: expressionID,
+        gender: gender
       },
       async: true
     });
-    return;
+    //return;
 
     //Find current URI
     url = new URI(window.location.href);
@@ -68,13 +83,30 @@ $(document).keydown(function(e){
     fase = url.query(true).fase;
     //Increment fase
     fase = parseInt(fase) + 1;
-
     //Change URI
     url.removeQuery("fase");
     url.addQuery("fase", fase);
 
-    //Redirect to new fase
-    window.location.href = url.href();
+    //Next fase is not outside the end
+    if(fase - 1 != 40) {
+      //Redirect to new fase
+      window.location.href = url.href();
+    } else {
+      //The end, go to begin to start a new fase
+      window.location.href = plainUrl;
+    }
+
+  } else {
+
+    //Failed test fase, find test button
+    var test_button = $("#testButton");
+    //Animate error color on button
+    test_button.addClass("red");
+    //Wait for a while
+    setTimeout(function(){
+      test_button.removeClass("red");
+    },600);
+
   }
 
 });

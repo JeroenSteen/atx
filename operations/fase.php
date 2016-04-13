@@ -3,6 +3,8 @@
 class FaseOperator {
 
   public function send($fase_id) {
+    //Decrement ID
+    $fase_id = $fase_id - 1;
 
     //Find test file
     $fases  = file_get_contents("tmp/test.json");
@@ -10,23 +12,35 @@ class FaseOperator {
     $fase   = $fases[$fase_id];
 
     //Find attributes
-    $profession  = $fase["profession"];
-    $expression  = $fase["expression"];
+    $profession     = $fase["profession"];
+    $profession_id  = $fase["profession_id"];
+    $expression     = $fase["expression"];
+    $expression_id  = $fase["expression_id"];
+    $branch_id      = $fase["branch_id"];
+    $gender         = $fase["gender"];
 
     //Profession up (0) or down (1)
     $pos = rand(0,1);
     //Profession needs to be up
     if($pos == 0) {
       $terms = [
-        'firstTerm'   => $profession,
-        'secondTerm'  => $expression,
-        'rightTerm'   => $profession
+        'firstTerm'       => $profession,
+        'secondTerm'      => $expression,
+        'rightTerm'       => $profession,
+        'branchID'        => $branch_id,
+        'expressionID'    => $expression_id,
+        'professionID'    => $profession_id,
+        'gender'          => $gender,
       ];
     } else {
       $terms = [
-        'firstTerm'   => $expression,
-        'secondTerm'  => $profession,
-        'rightTerm'   => $profession
+        'firstTerm'       => $expression,
+        'secondTerm'      => $profession,
+        'rightTerm'       => $profession,
+        'branchID'        => $branch_id,
+        'expressionID'    => $expression_id,
+        'professionID'    => $profession_id,
+        'gender'          => $gender,
       ];
     }
 

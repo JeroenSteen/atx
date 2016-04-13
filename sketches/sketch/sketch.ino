@@ -17,7 +17,6 @@ void setup() {
 
 void loop() {
   moveTerms();
-  
    if (Serial.available() > 0) { //if there is anything on the serial port, read it
         String msg = Serial.readString();
         int commaIndex = msg.indexOf(',');

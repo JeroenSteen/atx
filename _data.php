@@ -1,12 +1,15 @@
 <?php
+//Amount of testers, for finding the latest tester
+$tester_amount                 = TestFase::tester_amount();
+
 //Find score of tester; male art professions
-$art_male_tester_scores        = TestFase::tester_scores(1, 1, "male");
+$art_male_tester_scores        = TestFase::tester_scores($tester_amount, 1, "male");
 //Find score of tester; female art professions
-$art_female_tester_scores      = TestFase::tester_scores(1, 1, "female");
+$art_female_tester_scores      = TestFase::tester_scores($tester_amount, 1, "female");
 //Find score of tester; male art professions
-$tech_male_tester_scores       = TestFase::tester_scores(1, 2, "male");
+$tech_male_tester_scores       = TestFase::tester_scores($tester_amount, 2, "male");
 //Find score of tester; female art professions
-$tech_female_tester_scores     = TestFase::tester_scores(1, 2, "female");
+$tech_female_tester_scores     = TestFase::tester_scores($tester_amount, 2, "female");
 
 //Find totals for tester
 $art_male_tester_total         = TestFase::total_scores($art_male_tester_scores);
@@ -22,9 +25,6 @@ $art_female_testers_scores     = TestFase::testers_scores(1, "female");
 $tech_male_testers_scores      = TestFase::testers_scores(2, "male");
 //Find score of all testers; female art professions
 $tech_female_testers_scores    = TestFase::testers_scores(2, "female");
-
-//Amount of testers
-$tester_amount                 = TestFase::tester_amount();
 
 //Find mean of all testers
 $art_male_testers_mean         = TestFase::mean_scores($art_male_testers_scores, $tester_amount);

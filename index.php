@@ -4,9 +4,8 @@
 require('vendor/autoload.php');
 require('config/database.php');
 
-$test_op  = new TestOperator();
-$fases    = $test_op->make();
-
+//$test_op  = new TestOperator();
+//$fases    = $test_op->make();
 ?>
 
 <!doctype html>
@@ -58,6 +57,8 @@ $fases    = $test_op->make();
     <script src="js/chartjs/Chart.min.js"></script>
     <script src="js/uri/src/URI.min.js"></script>
 
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/moment-timezone-with-data.js"></script>
     <script src="js/interaction.js"></script>
 
     <?php include("_data.php"); ?>

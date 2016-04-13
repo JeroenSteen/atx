@@ -18,45 +18,83 @@ class TestOperator {
   }
 
   public function make() {
-
+    //Find art specific professions
     $art_specifics        = Profession::random_art($this->branch_amount);
+    //Find technology specific professions
     $tech_specifics       = Profession::random_tech($this->branch_amount);
-    $branch_specifics     = $art_specifics->merge($tech_specifics);
+    //Merge art and technology specific profession, then shuffle them
+    $branch_specifics     = $art_specifics->merge($tech_specifics)->shuffle();
     $term_expression      = "";
 
     //Loop all specifics
     foreach($branch_specifics as $key => $branch_specific) {
 
       //Find terms
-      $terms = $branch_specific->terms();
+      $terms = $branch_specific->desired_terms();
       foreach($terms as $term) {
-        if($term->is_material) $term_expression = $term->term;
-        if($term->is_technique) $term_expression = $term->term;
-        if($term->is_result) $term_expression = $term->term;
-        if($term->is_proces) $term_expression = $term->term;
-        if($term->is_method) $term_expression = $term->term;
 
+        $term_expression = isset($term->term) ? $term->term : "";
+        $expression_id   = "";
+        switch(true) {
+          case $term->is_material:
+            $expression_id = Expression::where("expression", "material")->first()->id;
+            break;
+          case $term->is_technique:
+            $expression_id = Expression::where("expression", "technique")->first()->id;
+            break;
+          case $term->is_result:
+            $expression_id = Expression::where("expression", "result")->first()->id;
+            break;
+          case $term->is_proces:
+            $expression_id = Expression::where("expression", "proces")->first()->id;
+            break;
+          case $term->is_method:
+            $expression_id = Expression::where("expression", "method")->first()->id;
+            break;
+          case $term->is_company:
+            $expression_id = Expression::where("expression", "company")->first()->id;
+            break;
+          case $term->is_exposure:
+            $expression_id = Expression::where("expression", "exposure")->first()->id;
+            break;
+        }
+
+        //Nothing usefull..
         if($term_expression == "") $term_expression = $term->term;
       }
+
+      //General information about profession
+      $profession_id = $branch_specific->id;
+      $branch_id     = $branch_specific->branch_id;
 
       //Find males and females
       if ($key % 2 == 0) {
         $profession = $branch_specific->profession_male;
 
         $this->fases[] = [
-          "male"        => 1,
-          "female"      => 0,
-          "profession"  => $profession,
-          "expression"  => $term_expression
+          "male"          => 1,
+          "female"        => 0,
+          "profession"    => $profession,
+          "expression"    => $term_expression,
+
+          "branch_id"     => $branch_id,
+          "profession_id" => $profession_id,
+          "expression_id" => $expression_id,
+          "gender"        => "male"
         ];
       } else {
         $profession = $branch_specific->profession_female;
 
         $this->fases[] = [
-          "male"        => 0,
-          "female"      => 1,
-          "profession"  => $profession,
-          "expression"  => $term_expression
+          "male"          => 0,
+          "female"        => 1,
+          "profession"    => $profession,
+          "expression"    => $term_expression,
+
+          "branch_id"     => $branch_id,
+          "profession_id" => $profession_id,
+          "expression_id" => $expression_id,
+          "gender"        => "female"
         ];
       }
 

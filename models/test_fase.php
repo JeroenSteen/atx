@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class TestFase extends Eloquent {
 
   protected $table = 'test_fases';
+  public $timestamps = false;
 
   //Find amount of testers
   public function tester_amount() {
