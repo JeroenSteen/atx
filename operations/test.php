@@ -68,12 +68,11 @@ class TestOperator {
       $branch_id     = $branch_specific->branch_id;
 
       //Find males and females
-      if ($key % 2 == 0) {
+      //if ($key % 2 == 0) {
+      if ($branch_specific->branch_fase_id % 2 == 0) {
         $profession = $branch_specific->profession_male;
 
         $this->fases[] = [
-          "male"          => 1,
-          "female"        => 0,
           "profession"    => $profession,
           "expression"    => $term_expression,
 
@@ -86,8 +85,6 @@ class TestOperator {
         $profession = $branch_specific->profession_female;
 
         $this->fases[] = [
-          "male"          => 0,
-          "female"        => 1,
           "profession"    => $profession,
           "expression"    => $term_expression,
 

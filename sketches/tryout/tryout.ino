@@ -1,49 +1,44 @@
 //Include the library code:
 #include <LiquidCrystal.h>
-
 //Initialize the library with the numbers of the interface pins
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-//Max length message, 99 chars with terminator
-//char receivedMsg[100];
+// include stack library header.
+#include <StackArray.h>
+// create a stack of characters.
+StackArray <String> stack;
+
 //Index to space in buffer
-//uint16_t bufferIndex;
+uint16_t bufferIndex;
+
+char *actors[]={"Tom", "Dick", "Harry", "Sheila"};
+long actor1;
+String msg = "";
 
 void setup() {
   //Set up Serial library at 9600 bps
   Serial.begin(9600);
-  
   //Set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
-
-  //Set terms with function
-  setTerms("Kunstschilder", "Schilderen");
 }
 
 void loop() {
-  /*bufferIndex = 0;
-  while (Serial.available()) {
-    receivedMsg[bufferIndex] = Serial.read();
-    bufferIndex++;
-  }*/
-  //String stringMsg = str(receivedMsg);
+  actor1 = random(sizeof(actors)/sizeof(char*));
   
-  //Buffer is filled
-  /*if (bufferIndex  != 0 ){
-    //setTerms("Ik", "kom");
-    String msg = Serial.readString();
-    int commaIndex = stringMsg.indexOf(',');
-    int msgLength = stringMsg.length();
-            
-    String beginTerm = stringMsg.substring(0, commaIndex);
-    String endTerm = stringMsg.substring(commaIndex+1, msgLength);
-        
-    setTerms(beginTerm, endTerm);
-    moveTerms();
-  }*/
-
-  if (Serial.available() > 0) { //if there is anything on the serial port, read it
-      String msg = Serial.readString();
+  bufferIndex = 0;
+  while (Serial.available()) {
+    stack.push(Serial.readString());
+    bufferIndex++;
+  }
+  
+  if (bufferIndex  != 0 ){
+      actor1 = random(sizeof(actors)/sizeof(char*));
+      Serial.println();
+ 
+      msg = actors[actor1]; //stack.pop();
+      msg += ",";
+      msg += actors[actor1];
+      
       int commaIndex = msg.indexOf(',');
       int msgLength = msg.length();
               
@@ -100,5 +95,5 @@ void moveTerms(){
   }
 
   // delay at the end of the full loop:
-  delay(1000);
+  //delay(1000);
 }

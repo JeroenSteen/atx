@@ -59,9 +59,13 @@ require('config/database.php');
 
     <script src="js/moment-with-locales.js"></script>
     <script src="js/moment-timezone-with-data.js"></script>
+
+    <script src="js/popup/jquery.popupoverlay.js"></script>
+
     <script src="js/interaction.js"></script>
 
     <?php include("_data.php"); ?>
+    <?php include("_popup.php"); ?>
 
   </body>
 </html>

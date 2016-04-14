@@ -15,16 +15,28 @@ class Profession extends Eloquent {
       ->get();
   }*/
   public static function random_art($amount) {
-    return Profession::where("branch_id", 1)
+    $professions = Profession::where("branch_id", 1)
       ->orderByRaw("RAND()")
       ->take($amount)
       ->get();
+    $branch_fase_id = 1;
+    foreach($professions as $profession_key => $profession) {
+      $professions[$profession_key]->branch_fase_id = $branch_fase_id;
+      $branch_fase_id++;
+    }
+    return $professions;
   }
   public static function random_tech($amount) {
-    return Profession::where("branch_id", 2)
+    $professions = Profession::where("branch_id", 2)
       ->orderByRaw("RAND()")
       ->take($amount)
       ->get();
+    $branch_fase_id = 1;
+    foreach($professions as $profession_key => $profession) {
+      $professions[$profession_key]->branch_fase_id = $branch_fase_id;
+      $branch_fase_id++;
+    }
+    return $professions;
   }
 
   public static function random() {
