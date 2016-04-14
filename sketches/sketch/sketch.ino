@@ -2,7 +2,8 @@
 #include <LiquidCrystal.h>
 
 //Initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 7);
 
 //Max length message, 99 chars with terminator
 //char receivedMsg[100];
@@ -55,6 +56,10 @@ void loop() {
    moveTerms();
 }
 
+void input(){
+  
+}
+
 void setTerms(String firstTerm, String secondTerm) {
   lcd.clear();
   
@@ -100,5 +105,5 @@ void moveTerms(){
   }
 
   // delay at the end of the full loop:
-  delay(1000);
+  delay(500);
 }

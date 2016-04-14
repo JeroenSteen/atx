@@ -89,7 +89,7 @@ class TestFase extends Eloquent {
       $total += $score->milliseconds;
     }
 
-    return $total / 1;
+    return $total / $testers;
   }
 
 }
