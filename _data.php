@@ -40,9 +40,9 @@ $tech_female_testers_mean      = TestFase::mean_scores($tech_female_testers_scor
     datasets: [
         {
             label: "Tester",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: "rgba(38,166,154,0.8)",
+            strokeColor: "rgba(38,166,154,1)",
+            pointColor: "rgba(238,110,115,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
@@ -67,9 +67,9 @@ $tech_female_testers_mean      = TestFase::mean_scores($tech_female_testers_scor
     datasets: [
         {
             label: "Tester",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: "rgba(38,166,154,0.8)",
+            strokeColor: "rgba(38,166,154,1)",
+            pointColor: "rgba(38,166,154,1)",
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",

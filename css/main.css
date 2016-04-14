@@ -14,3 +14,9 @@
 .mb-10 {
   margin-bottom: 10px;
 }
+.ma {
+  margin: 0;
+}
+.b {
+  font-weight: bold;
+}
