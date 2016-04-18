@@ -8,6 +8,9 @@ if(!StateOperator::is_state("start")) {
   echo '
   <a class="waves-effect waves-light btn" id="startButton" href="?state=start&fase=1&tester='.$tester_id.'">
     START TEST
+  </a>
+  <a class="waves-effect waves-light btn" href="'.get_home().'">
+    UITLEG
   </a>';
 
  } else {

@@ -46,8 +46,8 @@ class FaseOperator {
 
     //http://stackoverflow.com/questions/627965/serial-comm-with-php-on-windows
 
-    exec("mode COM5 BAUD=9600 PARITY=N data=8 stop=1 xon=off");
-    $fp = fopen("COM5", "w");
+    exec("mode COM5 BAUD=115200 PARITY=N data=8 stop=1 XON=off TO=on");
+    $fp = fopen("COM5", "w"); //r+
     $open_state = (!$fp) ? "Not open: " : "Open: ";
 
     //Write to port

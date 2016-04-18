@@ -2,17 +2,21 @@
 #include <LiquidCrystal.h>
 
 //Initialize the library with the numbers of the interface pins
-//LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-LiquidCrystal lcd(12, 11, 5, 4, 3, 7);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-//Max length message, 99 chars with terminator
-//char receivedMsg[100];
-//Index to space in buffer
-//uint16_t bufferIndex;
+//Message on display; example: "Kunstschilder,schilderen"
+String msg = "";
+//Old text needs interupt for showing new text on Display
+boolean needsInterupt = false;
+//Biggest term length
+int maxLength = 0;
+
+char receivedMsg[100];
+uint16_t bufferIndex;  
 
 void setup() {
-  //Set up Serial library at 9600 bps
-  Serial.begin(9600);
+  //Set up Serial library at 115200 bps
+  Serial.begin(115200);
   
   //Set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
@@ -42,26 +46,46 @@ void loop() {
     setTerms(beginTerm, endTerm);
     moveTerms();
   }*/
-
-  if (Serial.available() > 0) { //if there is anything on the serial port, read it
-      String msg = Serial.readString();
+  
+  //Buffer is filled
+  //if (bufferIndex  != 0 ){
+  if (Serial.available() > 0) {
+      needsInterupt = true;
+      
+      resetDisplay();
+      
+      msg = Serial.readString();
       int commaIndex = msg.indexOf(',');
       int msgLength = msg.length();
               
       String beginTerm = msg.substring(0, commaIndex);
       String endTerm = msg.substring(commaIndex+1, msgLength);
       
+      int beginLength = beginTerm.length();
+      int endLength = endTerm.length();
+      if(beginLength > endLength) {
+        maxLength = beginLength;
+      } else {
+        maxLength = endLength;
+      }
+      
       setTerms(beginTerm, endTerm);
+      
+      needsInterupt = false;
    }
-   moveTerms();
+   
+   //Shows current text
+   if(!needsInterupt) moveTerms();
 }
 
-void input(){
-  
+void resetDisplay() {
+  lcd.clear();
+  lcd.setCursor(0,0);
+  msg = "";
 }
 
 void setTerms(String firstTerm, String secondTerm) {
-  lcd.clear();
+  resetDisplay();
   
   //First row
   lcd.setCursor(1,0);
@@ -73,13 +97,16 @@ void setTerms(String firstTerm, String secondTerm) {
   //Print a message to the LCD.
   lcd.print(secondTerm);
   
-  lcd.scrollDisplayLeft();
+  //lcd.scrollDisplayLeft();
 }
 
 void moveTerms(){
+  
   // scroll 13 positions (string length) to the left
   // to move it offscreen left:
   for (int positionCounter = 0; positionCounter < 13; positionCounter++) {
+    if(needsInterupt) break;
+    
     // scroll one position left:
     lcd.scrollDisplayLeft();
     // wait a bit:
@@ -89,6 +116,8 @@ void moveTerms(){
   // scroll 29 positions (string length + display length) to the right
   // to move it offscreen right:
   for (int positionCounter = 0; positionCounter < 29; positionCounter++) {
+    if(needsInterupt) break;
+    
     // scroll one position right:
     lcd.scrollDisplayRight();
     // wait a bit:
@@ -98,12 +127,12 @@ void moveTerms(){
   // scroll 16 positions (display length + string length) to the left
   // to move it back to center:
   for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
+    if(needsInterupt) break;
+    
     // scroll one position left:
     lcd.scrollDisplayLeft();
     // wait a bit:
     delay(150);
   }
 
-  // delay at the end of the full loop:
-  delay(500);
 }

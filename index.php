@@ -6,6 +6,9 @@ require('config/database.php');
 
 //$test_op  = new TestOperator();
 //$fases    = $test_op->make();
+function get_home() {
+  return substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/'));
+}
 ?>
 
 <!doctype html>
@@ -29,7 +32,7 @@ require('config/database.php');
     <nav>
       <div class="nav-wrapper">
         <div class="container">
-          <a class="brand-logo">
+          <a class="brand-logo" href="<?php echo get_home(); ?>">
             ATX
           </a>
         </div>

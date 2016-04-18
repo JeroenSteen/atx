@@ -5,6 +5,10 @@ var url;
 //Passed test boolean
 var passed = false;
 
+var curUrl;
+var testerID;
+var state;
+
 function getTimeStamp(time) {
   //return time.toISOString().slice(0, 19).replace('T', ' ');
   return moment(time).tz("Europe/Amsterdam").format();
@@ -55,8 +59,16 @@ $(document).keydown(function(e){
     console.log(m);
 
     //Find current URI
-    var curUrl    = new URI(window.location.href);
-    var testerID  = curUrl.query(true).tester;
+    curUrl    = new URI(window.location.href);
+    try {
+      testerID  = curUrl.query(true).tester;
+      state     = url.query(true).state;
+    } catch (err) {
+      /* */
+    } finally {
+      //User still needs to start test
+      if(testerID == undefined && state != "start") return;
+    }
     plainUrl      = curUrl.search("").href();
 
     //console.log(bt,et,m,testerID,branchID,professionID,expressionID,gender);
@@ -92,6 +104,8 @@ $(document).keydown(function(e){
       //Redirect to new fase
       window.location.href = url.href();
     } else {
+      plainUrl = plainUrl+"?state=finish";
+
       //The end, go to begin to start a new fase
       window.location.href = plainUrl;
     }
