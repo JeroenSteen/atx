@@ -51,7 +51,7 @@ class FaseOperator {
     $open_state = (!$fp) ? "Not open: " : "Open: ";
 
     //Write to port
-    $writtenBytes = fputs($fp, $terms["firstTerm"].",".$terms["secondTerm"]);
+    $writtenBytes = fputs($fp, $terms["firstTerm"].",".$terms["secondTerm"].".");
 
     $terms["log"] = $open_state."Bytes written to port: $writtenBytes";
 

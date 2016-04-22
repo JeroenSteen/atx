@@ -121,6 +121,16 @@ $(document).keydown(function(e){
       test_button.removeClass("red");
     },600);
 
+    //Rumble WII controller
+    //http://stackoverflow.com/questions/9886369/javascript-call-a-c-sharp-function
+    //window.external.CreateFoo();
+
+    /*
+    To Init: send 03 80 01 followed by 34 80's
+    To Start Rumble: 03 c0 1b followed by 32 01's
+    To Stop Rumble: 03 c0 1b followed by 32 00's
+    */
+
   }
 
 });
